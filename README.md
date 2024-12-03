@@ -11,7 +11,7 @@ Campos:
 - Array de cuentas.
 
 Métodos:
-- Mostrar todas las cuentas del banco (iban, saldo y nif del cliente)
+- Mostrar todas las cuentas del banco (iban, saldo y nif del cliente).
 - Dado un iban, mostrar la información de la cuenta con ese iban. Si no existe una cuenta con ese iban devuelve null.
 - Dado un nif, mostrar todas las cuentas del cliente con ese nif 
 - Dado un iban y una cantidad de dinero, ingresar esa cantidad en la cuenta con ese iban. Si no se encuentra la cuenta con ese iban muestra el mensaje "No se encuentra la cuenta"
