@@ -14,9 +14,8 @@ public class Account {
     }
 
     public void showInfo() {
-        System.out.println("IBAN: " + iban +
-                ". Saldo: " + balance +
-                ". NIF cliente: " + customer.getNif()
+        System.out.println(
+                "IBAN: " + iban + ". Saldo: " + balance + ". NIF cliente: " + customer.getNif()
         );
     }
 

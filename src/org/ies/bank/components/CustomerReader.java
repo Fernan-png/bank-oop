@@ -14,12 +14,12 @@ public class CustomerReader {
         this.customerReader = customerReader;
     }
 
-    public Account read() {
+    //public Account read() {
 
-        System.out.println("Introduce el IBAN de la cuenta: ");
-        String iban = scanner.nextLine();
-
-        System.out.println("Introduce el saldo inicial de la cuenta: ");
-        double saldo = scanner.nextDouble();
-    }
+    //    System.out.println("Introduce el IBAN de la cuenta: ");
+     //   String iban = scanner.nextLine();
+//
+    //    System.out.println("Introduce el saldo inicial de la cuenta: ");
+    //    double saldo = scanner.nextDouble();
+    //}
 }
