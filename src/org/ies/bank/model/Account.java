@@ -1,17 +1,27 @@
 package org.ies.bank.model;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 public class Account {
     private String iban;
     private double balance;
-    private Customer[] customer;
+    private Customer customer;
 
-    public Account(String iban, Customer[] customer, double balance) {
+    public Account(String iban, double balance, Customer customer) {
         this.iban = iban;
-        this.customer = customer;
         this.balance = balance;
+        this.customer = customer;
+    }
+
+    public void showInfo() {
+        System.out.println("IBAN: " + iban +
+                ". Saldo: " + balance +
+                ". NIF cliente: " + customer.getNif()
+        );
+    }
+
+    public void deposit(double amount) {
+        balance += amount;
     }
 
     public String getIban() {
@@ -30,25 +40,24 @@ public class Account {
         this.balance = balance;
     }
 
-    public Customer[] getCustomer() {
+    public Customer getCustomer() {
         return customer;
     }
 
-    public void setCustomer(Customer[] customer) {
+    public void setCustomer(Customer customer) {
         this.customer = customer;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Account account = (Account) o;
-        return Double.compare(balance, account.balance) == 0 && Objects.equals(iban, account.iban) && Objects.deepEquals(customer, account.customer);
+        return Double.compare(balance, account.balance) == 0 && Objects.equals(iban, account.iban) && Objects.equals(customer, account.customer);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(iban, balance, Arrays.hashCode(customer));
+        return Objects.hash(iban, balance, customer);
     }
 
     @Override
@@ -56,7 +65,7 @@ public class Account {
         return "Account{" +
                 "iban='" + iban + '\'' +
                 ", balance=" + balance +
-                ", customer=" + Arrays.toString(customer) +
+                ", customer=" + customer +
                 '}';
     }
 }

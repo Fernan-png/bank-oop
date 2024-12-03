@@ -12,13 +12,37 @@ public class Bank {
         this.accounts = accounts;
     }
 
-    public boolean hasAccount(String IBAN) {
-        for (var Account : accounts) {
-            if (Account.getIban().equals(IBAN)) {
-                return true;
+    public void showAccounts() {
+        for (var account : accounts) {
+            account.showInfo();
+        }
+    }
+
+    public void showCustomerAccounts(String nif) {
+        for (var account : accounts) {
+            if (account.getCustomer().getNif().equals(nif)) {
+                account.showInfo();
             }
         }
-        return false;
+    }
+
+    public void deposit(String iban, double amount) {
+        var account = findAccount(iban);
+
+        if (account != null) {
+            account.deposit(amount);
+        } else {
+            System.out.println("Cuenta no encontrada");
+        }
+    }
+
+    public Account findAccount(String iban) {
+        for (var account : accounts) {
+            if (account.getIban().equals(iban)) {
+                return account;
+            }
+        }
+        return null;
     }
 
     public String getName() {
@@ -39,7 +63,6 @@ public class Bank {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Bank bank = (Bank) o;
         return Objects.equals(name, bank.name) && Objects.deepEquals(accounts, bank.accounts);
