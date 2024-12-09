@@ -12,9 +12,36 @@ public class Bank {
         this.accounts = accounts;
     }
 
+    public void showAccountCustomer(String iban) {
+        var account = findAccount(iban);
+        if(account == null) {
+            System.out.println("La cuenta no existe");
+        } else {
+            account.getCustomer().showInfo();
+        }
+    }
+
+    public int countCustomerAccounts(String nif) {
+        int count = 0;
+        for (var account : accounts) {
+            if(account.getCustomer().getNif().equals(nif)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
     public void showAccounts() {
         for (var account : accounts) {
-            account.showInfo();
+                account.showInfo();
+            }
+        }
+
+    public void showAccount(String iban) {
+        for (var account : accounts) {
+            if (account.getIban().equals(iban)) {
+                account.showInfo();
+            }
         }
     }
 
@@ -43,6 +70,19 @@ public class Bank {
             }
         }
         return null;
+    }
+
+    public void withdraw(String iban, double amount) {
+        var account = findAccount(iban);
+        if (account != null) {
+            if (account.getBalance() >= amount) {
+                account.deposit(-amount);
+            } else {
+                System.out.println("No hay suficiente saldo");
+            }
+        } else {
+            System.out.println("Cuenta no encontrada");
+        }
     }
 
     public String getName() {
