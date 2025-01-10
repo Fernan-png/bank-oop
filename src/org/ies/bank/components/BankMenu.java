@@ -122,7 +122,7 @@ public class BankMenu {
         System.out.println("8.Realizar transferencia");
         System.out.println("9.Salir");
 
-        //Leer la opcion
+        //Leer la opción
         option = scanner.nextInt();
         scanner.nextLine();
         return option;
