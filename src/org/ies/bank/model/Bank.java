@@ -14,7 +14,7 @@ public class Bank {
 
     public void showAccountCustomer(String iban) {
         var account = findAccount(iban);
-        if(account == null) {
+        if (account == null) {
             System.out.println("La cuenta no existe");
         } else {
             account.getCustomer().showInfo();
@@ -24,24 +24,26 @@ public class Bank {
     public int countCustomerAccounts(String nif) {
         int count = 0;
         for (var account : accounts) {
-            if(account.getCustomer().getNif().equals(nif)) {
+            if (account.getCustomer().getNif().equals(nif)) {
                 count++;
             }
         }
         return count;
     }
 
+
     public void showAccounts() {
         for (var account : accounts) {
-                account.showInfo();
-            }
+            account.showInfo();
         }
+    }
 
     public void showAccount(String iban) {
-        for (var account : accounts) {
-            if (account.getIban().equals(iban)) {
-                account.showInfo();
-            }
+        var account = findAccount(iban);
+        if (account == null) {
+            System.out.println("Cuenta no encontrada");
+        } else {
+            account.showInfo();
         }
     }
 
@@ -51,25 +53,6 @@ public class Bank {
                 account.showInfo();
             }
         }
-    }
-
-    public void deposit(String iban, double amount) {
-        var account = findAccount(iban);
-
-        if (account != null) {
-            account.deposit(amount);
-        } else {
-            System.out.println("Cuenta no encontrada");
-        }
-    }
-
-    public Account findAccount(String iban) {
-        for (var account : accounts) {
-            if (account.getIban().equals(iban)) {
-                return account;
-            }
-        }
-        return null;
     }
 
     public void withdraw(String iban, double amount) {
@@ -83,6 +66,48 @@ public class Bank {
         } else {
             System.out.println("Cuenta no encontrada");
         }
+    }
+
+
+
+    public void deposit(String iban, double amount) {
+        var account = findAccount(iban);
+
+        if (account != null) {
+            account.deposit(amount);
+        } else {
+            System.out.println("Cuenta no encontrada");
+        }
+    }
+
+    public void tranfer(String iban, String iban2, double amount){
+        Account account = findAccount(iban);
+        Account account2 = findAccount(iban2);
+
+        if (account != null && account2 != null){
+
+            if (account.getBalance() >= amount){
+
+                account.deposit(-amount);
+                account2.deposit(+amount);
+
+                account.showInfo();
+                account2.showInfo();
+            } else {
+                System.out.println("No hay suficiente dinero");
+            }
+        } else {
+            System.out.println("Una de las cuentas no existe");
+        }
+    }
+
+    public Account findAccount(String iban) {
+        for (var account : accounts) {
+            if (account.getIban().equals(iban)) {
+                return account;
+            }
+        }
+        return null;
     }
 
     public String getName() {
